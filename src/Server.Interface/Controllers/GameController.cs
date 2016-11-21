@@ -1,7 +1,9 @@
 ﻿using Server.Interface.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +25,7 @@ namespace Server.Interface.Controllers
             {
                 Id = Guid.NewGuid(), Active = false, TimeAndDate = DateTime.Now, Map = "default", Players = PlayerArray
             };
+            Database.StartNewGame(newGame.Id, Convert.ToInt32(newGame.Active), newGame.TimeAndDate, newGame.Map);
             return newGame;
         }
 
