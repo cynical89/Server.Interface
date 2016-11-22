@@ -28,5 +28,11 @@ namespace Server.Interface.Controllers
 
             return "Client is fully updated";
         }
+
+        [HttpGet]
+        public string Get()
+        {
+            return "No Version supplied, Updating!";
+        }
     }
 }
