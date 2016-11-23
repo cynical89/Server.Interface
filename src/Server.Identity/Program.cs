@@ -15,7 +15,7 @@ namespace Server.Identity
 
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://::500", "http://0.0.0.0:500")
+                .UseUrls("http://::500")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
