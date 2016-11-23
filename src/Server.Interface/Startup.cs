@@ -39,7 +39,7 @@ namespace Server.Interface
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                Authority = "http://localhost:500",
+                Authority = "http://0.0.0.0:5000",
                 ScopeName = "api1",
 
                 RequireHttpsMetadata = false
