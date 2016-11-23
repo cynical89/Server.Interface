@@ -8,18 +8,17 @@ namespace Server.Interface.Controllers
     public class GameController : ApiController
     {
         /**
-        * POST api/game
+        * GET api/game
         * 
         * Starts a new game
         */
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        public Game Post([FromBody]string value)
+        public Game Get()
         {
-            Array[] PlayerArray = new Array[12];
-            Game newGame = new Game()
+            var newGame = new Game()
             {
-                Id = Guid.NewGuid(), Active = false, TimeAndDate = DateTime.Now, Map = "default", Players = PlayerArray
+                Id = Guid.NewGuid(), Active = false, TimeAndDate = DateTime.Now, Map = "default"
             };
             Database.StartNewGame(newGame.Id, Convert.ToInt32(newGame.Active), newGame.TimeAndDate, newGame.Map);
             return newGame;
