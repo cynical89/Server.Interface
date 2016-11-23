@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Web.Http;
 
 namespace Server.Interface.Controllers
 {
-    [Route("api/[controller]")]
-    public class UpdateController
+    [RoutePrefix("api/update")]
+    public class UpdateController : ApiController
     {
         /**
         * GET api/update/:id
         * 
         * Retrieves update status by id
         */
-        [HttpGet("{id}")]
+        [Route("{id}")]
+        [HttpGet]
+        [AllowAnonymous]
         public string Get(int id)
         {
             if (id < 2)
@@ -27,12 +25,6 @@ namespace Server.Interface.Controllers
             }
 
             return "Client is fully updated";
-        }
-
-        [HttpGet]
-        public string Get()
-        {
-            return "No Version supplied, Updating!";
         }
     }
 }

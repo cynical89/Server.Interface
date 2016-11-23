@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Server.Interface
 {
@@ -15,7 +10,7 @@ namespace Server.Interface
         private static string queryText = string.Empty;
         // TODO: Add this string to a config file.
         private static readonly string connectionString =
-            "Data Source=ip;Integrated Security=False;User ID=sa;Password=*****;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            ConfigurationManager.ConnectionStrings["AuthContext"].ConnectionString;
         private static readonly SqlConnection myCon = new SqlConnection(connectionString);
 
         private static string NewGame(Guid id, int i, DateTime dt, string m)

@@ -1,15 +1,11 @@
 ﻿using Server.Interface.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Http;
 
 namespace Server.Interface.Controllers
 {
-    [Route("api/[controller]")]
-    public class GameController
+    [RoutePrefix("api/game")]
+    public class GameController : ApiController
     {
         /**
         * POST api/game
@@ -17,6 +13,7 @@ namespace Server.Interface.Controllers
         * Starts a new game
         */
         [HttpPost]
+        [Authorize]
         public Game Post([FromBody]string value)
         {
             Array[] PlayerArray = new Array[12];
@@ -29,25 +26,16 @@ namespace Server.Interface.Controllers
         }
 
         /**
-        * GET api/game
-        * 
-        * Retrieves all games
-        */
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "game1", "game2" };
-        }
-
-        /**
         * GET api/game/:id
         * 
         * Retrieves game by id
         */
-        [HttpGet("{id}")]
+        [Route("{id}")]
+        [HttpGet]
+        [AllowAnonymous]
         public string Get(int id)
         {
-            return "game";
+            return "game" + id;
         }
     }
 }
