@@ -7,16 +7,16 @@ namespace Server.Interface
     public class Database
     {
         public static Func<Guid, int, DateTime, string, string> StartNewGame = NewGame;
-        private static string queryText = string.Empty;
+        private static string _queryText = string.Empty;
         // TODO: Add this string to a config file.
-        private static readonly string connectionString =
+        private static readonly string ConnectionString =
             ConfigurationManager.ConnectionStrings["AuthContext"].ConnectionString;
-        private static readonly SqlConnection myCon = new SqlConnection(connectionString);
+        private static readonly SqlConnection MyCon = new SqlConnection(ConnectionString);
 
         private static string NewGame(Guid id, int i, DateTime dt, string m)
         {
-            queryText = "INSERT INTO dbo.Games (Id,Active,TimeAndDate,Map) VALUES (@val1, @val2, @val3, @val4)";
-            using (var cmd = new SqlCommand(queryText, myCon))
+            _queryText = "INSERT INTO dbo.Games (Id,Active,TimeAndDate,Map) VALUES (@val1, @val2, @val3, @val4)";
+            using (var cmd = new SqlCommand(_queryText, MyCon))
             {
                 cmd.Parameters.AddWithValue("@val1", id);
                 cmd.Parameters.AddWithValue("@val2", i);
@@ -24,7 +24,7 @@ namespace Server.Interface
                 cmd.Parameters.AddWithValue("@val4", m);
                 try
                 {
-                    myCon.Open();
+                    MyCon.Open();
                     cmd.ExecuteNonQuery();
                 }
                 catch (SqlException err)
@@ -34,7 +34,7 @@ namespace Server.Interface
                 }
                 finally
                 {
-                    myCon.Close();
+                    MyCon.Close();
                 }
             }
             return id.ToString();
